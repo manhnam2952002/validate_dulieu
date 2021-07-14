@@ -24,18 +24,25 @@ class StoreProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:10|max:15',
-            'price' => 'required'
+            'eventName' => 'required|min:20',
+            'bandNames' => 'required',
+            'startDate' => 'required',
+            'endDate' => 'required',
+            'ticketPrice' => 'required',
+            'status' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Vui lòng nhập tên.',
-            'name.min' => 'Tên phải lớn hơn 10 ký tự.',
-            'name.max' => 'Tên phải nhỏ hơn 15 ký tự.',
-            'price.required' => 'Vui lòng nhập giá.'
+            'eventName.required' => 'Vui lòng nhập tên.',
+            'eventName.min' => 'Tên phải 20 ký tự trở lên.',
+            'bandNames.required' => 'Vui lòng nhập tên ban nhạc.',
+            'startDate.required' => 'Vui lòng nhập ngày bắt đầu.',
+            'endDate.required' => 'Vui lòng nhập ngày kết thúc.',
+            'ticketPrice.required' => 'nhập giá vé phải lớn hơn 0.',
+            'status.required' => 'vui lòng nhập có giá trị là 0, 1, 2, 3'
         ];
     }
 
@@ -43,8 +50,8 @@ class StoreProductRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            if($this->get('name') == 'xuanhung'){
-                $validator->errors()->add('name', 'Tao không chơi với thằng Hùng.');
+            if($this->get('name') == 'manhnam'){
+                $validator->errors()->add('name', 'Dep trai .');
             }
         });
     }
